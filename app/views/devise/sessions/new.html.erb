@@ -1,0 +1,63 @@
+<div class="cont">
+<section class="vh-100">
+  <div class="container-fluid h-custom">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-md-9 col-lg-6 col-xl-5">
+        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
+          class="img-fluid" alt="Sample image">
+      </div>
+      <div class="col-md-6 col-lg-6 offset-xl-1">
+        <h2 class="text-uppercase text-center mb-4">Login Account</h2>
+              
+          <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+                <div class="d-flex flex-row align-items-center justify-content-center justify-content-start">
+            <p class="lead fw-normal mb-0 me-3">Sign in with</p>
+            
+                <div class="form-group mb-4">
+                  <%= f.label :email,class:"from-label" %><br>
+                  <%= f.email_field :email , class:"form-control" %>
+                 </div>
+
+                <div class="form-group mb-4">
+                  <%= f.label :password ,class:"from-label"%><br>
+                  <%= f.password_field :password ,class:"form-control "%>
+                </div>
+
+             <% if devise_mapping.rememberable? %>
+              <div class="field">
+              <%= f.check_box :remember_me %>
+              <%= f.label :remember_me %>
+              </div>
+              <%end%>
+</div>
+</div>
+
+                <div class="d-flex justify-content-center">
+                  
+                     <%= f.submit "Login ",class:"btn btn-primary text-body"%>
+                </div>
+
+                <p class="text-center text-muted mt-5 mb-0">Create a new Account
+                  <a href="sign_up"><u>Create Account</u></a></p>
+                  
+              <%end%>
+
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>
+</section>
+</div>
+<style>
+
+.cont{
+  padding left: 10%;
+ font: italic small-caps bold 20px/45px Georgia, serif;
+ padding-top: 7%;
+}
+</style>
+
+
+
+

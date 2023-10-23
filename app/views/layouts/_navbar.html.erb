@@ -1,0 +1,32 @@
+<nav class="navbar navbar-inverse">
+  <div class="container">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">The Rental Room</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="<%= root_path %>">Home</a></li>
+
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <%if user_signed_in? %>
+        <% if current_user.role.name == "Broker" || current_user.role.name == "Owner" %>
+        <li><a href="<%= new_property_path %>"><span class="glyphicon glyphicon-user"></span>Add Properties</a></li>
+         <%elsif current_user.role.name =="Seeker"%>
+        <li><a href="<%= properties_path %>"><span class="glyphicon glyphicon-user"></span>See Properties</a></li> 
+   <li><a href="<%= dashboard_path %>"><span class="glyphicon glyphicon-user"></span>Dashboard</a></li> 
+        <%end%> 
+        <%end%>
+        <% unless user_signed_in? %>
+      <li><a href="<%= new_user_registration_path %>"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+      <li><a href="<%= new_user_session_path %>"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+      <%end%>
+      <li><a href="/sign_out"><span class="glyphicon glyphicon-log-in"></span> Log Out</a></li> 
+    </ul>
+  </div>
+</nav>
+
+<style>
+  .container{
+     font: italic small-caps bold 17px/45px Georgia, serif;
+  }
+</style>

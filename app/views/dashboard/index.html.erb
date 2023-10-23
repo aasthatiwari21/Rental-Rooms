@@ -1,0 +1,87 @@
+
+<% @booked_properties.each do |booking| %>
+  <div class="property-card">
+    <h2><%= booking.property.name %></h2>
+    <p><%= booking.property.description %></p>
+    <p><%= booking.property.location %></p>
+  
+  </div>
+  <%end%>
+
+  <%= render "layouts/navbar" %>
+<div class="con">
+<h1>Your Booked Property</h1>
+  <p><strong>Type:</strong> <%= @property.property_type.name%></p>
+  <p><strong>Size (in sqft):</strong> <%= @property.size_sq_ft %></p>
+  <p><strong>Bedrooms:</strong> <%= @property.bedroom %></p>
+  <p><strong>Bathrooms:</strong> <%= @property.bathroom %></p>
+  <p><strong>Furnishing:</strong> <%= @property.furnishing %></p>
+  <p><strong>Resident Type:</strong> <%= @property.resident_type %></p>
+  <p><strong>Listed By:</strong> <%= @property.listed_by %></p>
+  <p><strong>Rent:</strong> <%= @property.rent %></p>
+<div class="property-images">
+  <h3>Images</h3>
+  <% @property.images.each do |image| %>
+    <%= image_tag image%>
+  <% end %>
+</div>
+</div>
+
+<h3>Reviews</h3>
+
+<% @property.reviews.each do |review| %>
+  <p>
+    <strong>Rating:</strong>
+    <%= review.rating %>
+  </p>
+  <p>
+    <strong>Comment:</strong>
+    <%= review.comment %>
+  </p>
+<% end %>
+
+<div class="aaa">
+<button onclick="myFunction()">Add Reviews</button>
+
+<div id="myDIV">
+      <%= form_with model: [ @property, @property.reviews.build ] do |form| %>
+    <div class="cas">
+      <p>
+        <%= form.label :rating %><br>
+        <%= form.number_field :rating %>
+      </p>
+      <p>
+        <%= form.label :comment%><br>
+        <%= form.text_area :comment %>
+      </p>
+      <p>
+        <%= form.submit %>
+      </p>
+    <% end %>
+    </div>
+  </div>
+  </div>
+<style>
+  .cas{
+    width:40%;
+    height:20%;
+  }
+  .con{
+ font: italic small-caps bold 20px/40px Georgia, serif;
+    padding-left: 3%;
+  }
+
+  body{ 
+      background-image: linear-gradient(to right ,#778899, #2F4F4F); color: black;
+  }
+</style>
+<script>
+function myFunction() {
+  var x = document.getElementById("myDIV");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+</script>

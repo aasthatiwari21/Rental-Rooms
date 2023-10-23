@@ -1,0 +1,97 @@
+<%= render "layouts/navbar" %>
+
+<div class="con">
+<h1>Property Details</h1>
+<h3>Images:</h3>
+
+<div class="property-images">
+  <% @property.images.each do |image| %>
+    <%= image_tag image%>
+  <% end %>
+</div> 
+
+
+
+<div id="demo" class="carousel slide" data-ride="carousel">
+
+  <!-- Indicators -->
+  <ul class="carousel-indicators">
+    <li data-target="#demo" data-slide-to="0" class="active"></li>
+    <li data-target="#demo" data-slide-to="1"></li>
+    <li data-target="#demo" data-slide-to="2"></li>
+  </ul>
+
+  <!-- The slideshow -->
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="" alt="Los Angeles">
+    </div>
+   
+  </div>
+
+  <!-- Left and right controls -->
+  <a class="carousel-control-prev" href="#demo" data-slide="prev">
+    <span class="carousel-control-prev-icon"></span>
+  </a>
+  <a class="carousel-control-next" href="#demo" data-slide="next">
+    <span class="carousel-control-next-icon"></span>
+  </a>
+
+</div>
+
+  <p>Type:<%= @property.property_type.name%></p>
+  <p>Size (in sqft):<%= @property.size_sq_ft %></p>
+  <p>Bedrooms:<%= @property.bedroom %></p>
+  <p>Bathrooms:<%= @property.bathroom %></p>
+  <p>Furnishing:<%= @property.furnishing %></p>
+  <p>Resident Type: <%= @property.resident_type %></p>
+  <p>Listed By: <%= @property.listed_by %></p>
+  <p>Rent: <%= @property.rent %></p>
+  <div class="contt">
+
+  <% if current_user.role.name == "Broker" || current_user.role.name == "Owner" %>
+    <p><%= link_to "Edit",edit_property_path(@property),class:'btn btn-success' %></p>
+    <p><%= link_to "Destroy", root_path, 
+                    method: :delete , class:"btn btn-success"
+                  %></p>
+  <%end%>
+
+  <% if current_user.role.name == "Seeker"%>
+      <%= link_to "Contact Owner" ,contact_owner_property_path(@property),class: "btn btn-success" %>
+ 
+  <%end%>   
+  <% if current_user && current_user.broker? %>
+      <%= link_to "View Brokered Properties", properties_path(furnishing: "brokered") %>
+  <% end %>
+
+  <div>
+
+</div>
+
+
+
+<style>
+  .cas{
+    width:40%;
+    height:20%;
+  }
+  .con{
+ font: italic small-caps bold 20px/40px Georgia, serif;
+    padding-left: 3%;
+  }
+
+  body{ 
+        background-color: #E6E6FA; color: black;
+  }
+</style>
+
+<script>
+function myFunction() {
+  var x = document.getElementById("myDIV");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+</script>
