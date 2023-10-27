@@ -1,130 +1,116 @@
- <%= render "layouts/navbar" %>  
-  <style>
-    *{
-    margin: 0px;
-    padding: 0px;
-}
-
-
-#horizontal-nav{
-    background: hsl(24, 56%, 93%);
-    height:37px;
-    display: flex;
-    align-items: center;
-}
-.horizontal-nav-items {
-  padding: 0;
-    color: black;
-    padding-right: 4%;
-    padding-left: 2%;
-    font-size: 15px;
-    height: 37px ;
-    align-items: center;
-    text-decoration: none;
-}
-.horizontal-nav-items:hover {
-    color: #fff!important;
-    background-color: #008000!important;
-}
-
-#vertical-nav {
-    display: flex;
-    flex-direction: column;
-    width: 10%;
-    background-color: #f7ebe3;
-    position: absolute;
-    height: 113%;
-}
-.vertical-nav-items {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-decoration: none;
-    color: black;
-    font-size: 2vw;
-    padding-top: 40%;
-    padding-bottom: 15%;
-    background-color: #f7ebe3;
-}
-.vertical-nav-items:hover {
-    color: #fff!important;
-    background-color: #008000!important;
-}
-
-
-img {
-    vertical-align: middle;
-    height: 50%;
-    width: 100%;
-    padding-left: 10%;
-}
-
-
-.header{
-    width: 100%;
-    float: right;
-    margin-bottom: 30px;
-}
-.center{
-    text-align: center;
-}
-#website-heading {
-    font-weight: 700;
-}
-
-.register-button{
-  border-radius: 5px;
-    width: 160px;
-    background-color: #22952b;
-    font-size: 20px;
-}
-
-
-
-#login,#about-contact-icon1,#about-contact-icon2,#about-contact-icon3,#about-contact-icon4{
-    display: none;
-}
-
-    body {
-      font-family: "serif;"
-    }
-  </style>
+<%= render "layouts/navbar" %>  
+<style>
+   *{
+   margin: 0px;
+   padding: 0px;
+   }
+   #horizontal-nav{
+   background: hsl(24, 56%, 93%);
+   height:37px;
+   display: flex;
+   align-items: center;
+   }
+   .horizontal-nav-items {
+   padding: 0;
+   color: black;
+   padding-right: 4%;
+   padding-left: 2%;
+   font-size: 15px;
+   height: 37px ;
+   align-items: center;
+   text-decoration: none;
+   }
+   .horizontal-nav-items:hover {
+   color: #fff!important;
+   background-color: #008000!important;
+   }
+   #vertical-nav {
+   display: flex;
+   flex-direction: column;
+   width: 10%;
+   background-color: #f7ebe3;
+   position: absolute;
+   height: 113%;
+   }
+   .vertical-nav-items {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+   text-decoration: none;
+   color: black;
+   font-size: 2vw;
+   padding-top: 40%;
+   padding-bottom: 15%;
+   background-color: #f7ebe3;
+   }
+   .vertical-nav-items:hover {
+   color: #fff!important;
+   background-color: #008000!important;
+   }
+   img {
+   vertical-align: middle;
+   height: 50%;
+   width: 100%;
+   padding-left: 10%;
+   }
+   .header{
+   width: 100%;
+   float: right;
+   margin-bottom: 30px;
+   }
+   .center{
+   text-align: center;
+   }
+   #website-heading {
+   font-weight: 700;
+   }
+   .register-button{
+   border-radius: 5px;
+   width: 160px;
+   background-color: #22952b;
+   font-size: 20px;
+   }
+   #login,#about-contact-icon1,#about-contact-icon2,#about-contact-icon3,#about-contact-icon4{
+   display: none;
+   }
+   body {
+   font-family: "serif;"
+   }
+</style>
 </head>
-
 <body>
-  
-<nav id="vertical-nav">
-    <a href="#" class="vertical-nav-items">
-      <p class="fa fa-home"></p>
-      <p>Home</p>
-    </a>
-    <a href="#about-row" class="vertical-nav-items">
-      <i class="fa fa-user"></i>
-      <p>About</p></a>
-    <a href="#" class="vertical-nav-items">
-      <i class="fa fa-eye"></i>
-      <p>Contact</p>
-    </a>
-    <a href="<%= new_user_session_path%>" class="vertical-nav-items">
+   <nav id="vertical-nav">
+      <a href="#" class="vertical-nav-items">
+         <p class="fa fa-home"></p>
+         <p>Home</p>
+      </a>
+      <a href="#about-row" class="vertical-nav-items">
+         <i class="fa fa-user"></i>
+         <p>About</p>
+      </a>
+      <a href="#" class="vertical-nav-items">
+         <i class="fa fa-eye"></i>
+         <p>Contact</p>
+      </a>
+      <a href="<%= new_user_session_path%>" class="vertical-nav-items">
          <i class="fa fa-envelope"></i>
-          <p>SignIn</p>
-    </a>
-     <a href="<%= new_user_registration_path%>", class="vertical-nav-items">
+         <p>SignIn</p>
+      </a>
+      <a href="<%= new_user_registration_path%>", class="vertical-nav-items">
          <i class="fa fa-envelope"></i>
-      <p>Register</p>
-    </a>
-</nav>
-
-  <header class: header>
+         <p>Register</p>
+      </a>
+   </nav>
+   <header class: header>
       <img id="header-img" src="<%= image_path("pic1.jpg")%>" />
-    <div class="center">
-      <h1 id='welcome'>Welcome To</h1>
-      <h1 id="website-name">Rental Room</h1>
-      <p id="reg-para" style="display: block;">Register yourself to get notified for latest updates and plans.</p>
-      <%=button_to "Register",new_user_session_path, class: "register-button"%>
-    </div>
-  </header>
+      <div class="center">
+         <h1 id='welcome'>Welcome To</h1>
+         <h1 id="website-name">Rental Room</h1>
+         <p id="reg-para" style="display: block;">Register yourself to get notified for latest updates and plans.</p>
+         <%=button_to "Register",new_user_session_path, class: "register-button"%>
+      </div>
+   </header>
    <%= render "layouts/footer"%>
 </body>
 </html>

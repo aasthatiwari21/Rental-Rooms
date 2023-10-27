@@ -100,27 +100,17 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
    
 
-  # def edit
+   def edit
+      @user = User.find(@user.id)
+   end
 
-  # @user = User.find(@user.id)
+   def update
 
-  # end
-
-   
-
-   
-
-  # def update
-
-  # @user = User.find(@user.id)
-
-  # @user.update(user_params)
-
-  # sign_in @user
-
-  # redirect_to root_path
-
-  # end
+     @user = User.find(@user.id)
+        @user.update(user_params)
+        sign_in @user
+        redirect_to "/dashboard/index"
+   end
 
  
 

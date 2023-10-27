@@ -1,126 +1,109 @@
 <%= render "layouts/navbar" %>
 <div class="container-fluid" >
-<div class="split left">
-        <br>
-        <h4>Filter Properties</h4>
-        <%= form_tag(properties_path, method: :get, class: "form") do %>
-        <div class="form-group">
-          <%= label_tag "Bedroom" %><br>
-          <%= number_field_tag "bedroom",nil, class: "form-control" %>
-        </div>
-        <div class="form-group">
-          <%= label_tag "Bathroom" %><br>
-          <%= number_field_tag "bathroom", nil, class: "form-control" %>
-        </div>
-        <div class="form-group">
-          <%= label_tag "Size (sqft)" %><br>
-          <%= number_field_tag "size_sq_ft", nil, class: "form-control" %>
-        </div>
-         
-
-        <div class="form-outline mb-3">
-                    <%= label_tag :furnishing, 'Furnishing' %><br>
-                    <%= radio_button_tag :furnsihing, 'unfurnished' %>
-                    <%= label_tag :furnishing_unfurnished, 'Unfurnished' %><br>
-                    <%= radio_button_tag :furnishing, 'semi_furnished'%>
-                    <%= label_tag :furnihsing_semi_furnished, 'Semi-furnished'%><br>
-                    <%= radio_button_tag :furnishing, 'fully_furnished'%>
-                    <%= label_tag :furnihsing_fully_furnished, 'Fully-furnished'%>          
-        </div>
-          <div class="form-group">
-              <%=label_tag "Min Rent "%> <br>
-              <%= number_field_tag :min_rent, min: 0, class: "form-control"%> <br>
-              <%=label_tag "Max Rent "%><br>
-             <%= number_field_tag :max_rent, max: 100000, class: "form-control" %>
-          </div>
-        <%= submit_tag "Apply Filters", class: "btn btn-success"%>
-        <% end %>
+   <div class="split left">
+      <br>
+      <h4>Filter Properties</h4>
+      <%= form_tag(properties_path, method: :get, class: "form") do %>
+      <div class="form-group">
+         <%= label_tag "Bedroom" %><br>
+         <%= number_field_tag "bedroom",nil, class: "form-control" %>
       </div>
-      <div class="split right">
-      <div class="search">
-        <%= form_tag(search_path,:method => "get") do%>
-        <div class="input-group">
-          <%= search_field_tag :search,params[:search],placeholder:"Type",class:"form-control"%>
-        </div>
-          <div class="input-group-btn">
-            <%= button_tag "Search Here", :class =>'btn btn-info glyphicon glyphicon-search ',:address=>nil%>
-          </div>
-        </div>
-      <%end%>
-
-
-  <h2 class="text-center mb-4">Available Properties</h2>
-  <br><br>
-  <% @properties.each do |property| %>
-  <div class="col-md-4 mb-4">
-    <div class="property-box p-3">
-      <% if property.images.present? %>
-      <%= image_tag property.images.first, class: "img-fluid", alt: "Property Image" %>
+      <div class="form-group">
+         <%= label_tag "Bathroom" %><br>
+         <%= number_field_tag "bathroom", nil, class: "form-control" %>
+      </div>
+      <div class="form-group">
+         <%= label_tag "Size (sqft)" %><br>
+         <%= number_field_tag "size_sq_ft", nil, class: "form-control" %>
+      </div>
+      <div class="form-outline mb-3">
+         <%= label_tag :furnishing, 'Furnishing' %><br>
+         <%= radio_button_tag :furnsihing, 'unfurnished' %>
+         <%= label_tag :furnishing_unfurnished, 'Unfurnished' %><br>
+         <%= radio_button_tag :furnishing, 'semi_furnished'%>
+         <%= label_tag :furnishing_semi_furnished, 'Semi-furnished'%><br>
+         <%= radio_button_tag :furnishing, 'fully_furnished'%>
+         <%= label_tag :furnishing_fully_furnished, 'Fully-furnished'%>          
+      </div>
+      <div class="form-group">
+         <%=label_tag "Min Rent "%> <br>
+         <%= number_field_tag :min_rent, min: 0, class: "form-control"%> <br>
+         <%=label_tag "Max Rent "%><br>
+         <%= number_field_tag :max_rent, max: 100000, class: "form-control" %>
+      </div>
+      <%= submit_tag "Apply Filters", class: "btn btn-success"%>
       <% end %>
-      <p>Type: <%= property.property_type.name%></p>
-      <p>Location: <%= property.address %></p>
-      <p>Listed By: <%= property.listed_by %></p>
-      <p>Availablity: <%= property.availability_status %></p>
-      <a href="<%= property_path(property) %>" class="btn btn-success">View Details</a><br><br>
-    </div>
-  </div>
-  <% end %>
+   </div>
+   <div class="split right">
+      <div class="search">
+         <%= form_tag(search_path,:method => "get") do%>
+         <div class="input-group">
+            <%= search_field_tag :search,params[:search],placeholder:"Type",class:"form-control"%>
+         </div>
+         <div class="input-group-btn">
+            <%= button_tag "Search Here", :class =>'btn btn-info glyphicon glyphicon-search ',:address=>nil%>
+         </div>
+         <%end%>
+      </div>
+      <h2 class="text-center mb-4">Available Properties</h2>
+      <br><br>
+      <% @properties.each do |property| %>
+      <div class="col-md-4 mb-4">
+         <div class="property-box p-3">
+            <% if property.images.present? %>
+            <%= image_tag property.images.first, class: "img-fluid", alt: "Property Image" %>
+            <% end %>
+            <p>Type: <%= property.property_type.name%></p>
+            <p>Location: <%= property.address %></p>
+            <p>Listed By: <%= property.listed_by %></p>
+            <a href="<%= property_path(property) %>" class="btn btn-success">View Details</a><br><br>
+         </div>
+      </div>
+      <% end %>
+   </div>
 </div>
-</div>
-
-
-
-
 
 <style>
-  .search{
-  margin-top: 40px;
-  padding-left: 84%;
-  height: 8%;
-  }
-  .split {
-  height: 100%;
-  width: 80%;
-  position: absolute;
-  top: 0;
-  padding-top: 20px;
-}
-
-.left {
-  left: 0%;
-  right: 60%;
-  padding-right: 65% ;
-  padding-top: 10%;
-  padding-left: 1%;
-  position: absolute;
-}
-
-.right {
-  right: 0;
-  position: absolute;
-}
-
-.centered {
-  position: absolute;
-  top: 50%;
-  left: 20%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-
-}
-
-  body {
-        background-color: #E6E6FA; color: black;
-
-}
-
-input[type=radio] {
-  border: 1px solid #fff;
-  padding: 0.5em;
-  -webkit-appearance: none;
-}
-
-input[type=radio]:checked {
-  background-size: 9px 9px;
-}
+   .search{
+   margin-top: 40px;
+   padding-left: 84%;
+   height: 8%;
+   }
+   .split {
+   height: 100%;
+   width: 80%;
+   position: absolute;
+   top: 0;
+   padding-top: 20px;
+   }
+   .left {
+   left: 0%;
+   right: 60%;
+   padding-right: 65% ;
+   padding-top: 10%;
+   padding-left: 1%;
+   position: absolute;
+   }
+   .right {
+   right: 0;
+   position: absolute;
+   }
+   .centered {
+   position: absolute;
+   top: 50%;
+   left: 20%;
+   transform: translate(-50%, -50%);
+   text-align: center;
+   }
+   body {
+   background-color: #E6E6FA; color: black;
+   }
+   input[type=radio] {
+   border: 1px solid #fff;
+   padding: 0.5em;
+   -webkit-appearance: none;
+   }
+   input[type=radio]:checked {
+   background-size: 9px 9px;
+   }
 </style>

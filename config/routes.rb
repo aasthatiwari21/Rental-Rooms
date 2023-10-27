@@ -1,8 +1,4 @@
 Rails.application.routes.draw do
-  get 'booking/new'
-  get 'booking/create'
-  get 'booking/success'
-  resources :orders
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
     devise_for :users,controllers: {
@@ -36,14 +32,17 @@ Rails.application.routes.draw do
     get '/sign_out', to: 'users/sessions#destroy'
   end
 
-    # post 'payments/create' 
     get 'payment/success' , to: 'payments#success'
-    get 'payments/cancel'
+    get 'payments/cancel' , to: 'payments#cancel'
 
     get '/dashboard', to: 'dashboard#index'
- resources :properties do
-   get "/pay", to: "payments#new", as: :pay
 
-end
+  namespace :api do 
+    resources :reviews
+    resources :users 
+    resources :properties do 
+      post "/arpit", to: 'properties#arpit'
+    end
+  end
 
 end

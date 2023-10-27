@@ -89,4 +89,7 @@ gem 'cancancan'
 gem 'activeadmin'
 
 gem 'stripe'
+
 gem 'dotenv-rails', :groups => [:development, :test]
+
+gem 'fast_jsonapi'

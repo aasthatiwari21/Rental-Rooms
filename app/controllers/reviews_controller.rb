@@ -2,7 +2,10 @@ class ReviewsController < ApplicationController
 
 
     def create
-        Review.new(comment: params[:review][:comment], user_id: current_user.id, property_id: params[:property_id].to_i, rating: params[:review][:rating].to_i).save!
+        Review.new(comment: params[:review][:comment], 
+        user_id: current_user.id,
+        property_id: params[:property_id].to_i,
+        rating: params[:review][:rating].to_i).save!
         redirect_to property_path
     end
 

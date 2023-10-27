@@ -18,11 +18,15 @@ class PaymentsController < ApplicationController
     def success
       @property=Property.find_by(params[:id])
       @property.unavailable!
+      booked=true
       flash[:success]= 'Congratulations you have booked the property'
       render :success
     end
 
-
+    def cancel
+      flash[:alert] = "Your Payment is Failed Please Try Again"
+      redirect_to property_path
+    end
 	private
   def create_product
     Stripe::Product.create({
@@ -46,8 +50,6 @@ class PaymentsController < ApplicationController
   end
   
 
-  def get_payment_intent
-    Stripe::PaymentIntent.retrieve(@property.payment_intent_id)
-  end
+  
 
 end
