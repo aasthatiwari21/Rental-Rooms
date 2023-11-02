@@ -7,7 +7,6 @@ class Api::PropertiesController<ApplicationController
 	end
 
 	def create
-		debugger
 		 property = Property.new(property_params)
 		if property.save
 		 	render json: {data: property}

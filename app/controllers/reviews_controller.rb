@@ -1,6 +1,4 @@
 class ReviewsController < ApplicationController
-
-
     def create
         Review.new(comment: params[:review][:comment], 
         user_id: current_user.id,

@@ -1,28 +1,23 @@
-
 class ApplicationController < ActionController::Base
-
-  # before_action :configure_permitted_parameters, if: :devise_controller?
-  # before_action :authenticate_user!
-
-  #   protected
-  #   def configure_permitted_parameters
-
-  #     devise_parameter_sanitizer.permit(:sign_up) { |u| u.permit(:name, :email, :password, :role_id, :contact,:city,:password_confirmation)}
-
- 
-
-  #     devise_parameter_sanitizer.permit(:account_update) { |u| u.permit(:name, :email, :password, :current_password)}
-
-  #   end
-  rescue_from CanCan::AccessDenied do |exception|
-  redirect_to root_url, :alert => exception.message
+  include JsonWebToken
+   # Rbefore_action :authorize_request
+  # skip_before_action :verify_authenticity_token
 
   
-end
-  require 'stripe'
+  def not_found
+    render json: { error: 'not_found' }
+  end
 
-   Stripe.api_key = 'sk_test_51O2YupSGEzrH4LcszHrWTM5KGMHQsnS1RW4n32BDvqUtbwxcXV2Dc357Xde4PqLUzhHbpPN2awYM5hO0qYla9Lrl00iPuuobIN'
-
-
-
+  def authorize_request
+    header = request.headers['Authorization']
+    header = header.split(' ').last if header
+    begin
+      @decoded = JsonWebToken.decode(header)
+      @current_user = User.find(@decoded[:user_id])
+    rescue ActiveRecord::RecordNotFound => e
+      render json: { errors: e.message }, status: :unauthorized
+    rescue JWT::DecodeError => e
+      render json: { errors: e.message }, status: :unauthorized
+    end
+  end
 end

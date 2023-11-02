@@ -1,6 +1,6 @@
 class Property < ApplicationRecord
 	belongs_to :user
-
+	has_one :payment
 	has_many :reviews ,dependent: :destroy
 	enum :furnishing,[:unfurnished,:semi_furnished,:fully_furnished],presence:true
 	enum :resident_type,[:bachelor,:family],presence: true
@@ -11,7 +11,6 @@ class Property < ApplicationRecord
 	has_many_attached :images
 	belongs_to :property_type
 	enum :availability_status,[:available,:unavailable]
-    enum status: [:pending, :processing, :failed, :succeed]
     scope :owned_by, ->(user) { where(user_id: user.id) }
     scope :listed_by_broker, -> { where(listed_by: 'broker') } 
     scope :booked_by_owner, ->(owner) { where(user: owner, booked: true) }

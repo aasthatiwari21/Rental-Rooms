@@ -2,7 +2,6 @@ class Api::ReviewsController <ApplicationController
   skip_before_action :verify_authenticity_token
  
   def index
-    debugger
    render json: ReviewSerializer.new(Review.all)
   end
    def create

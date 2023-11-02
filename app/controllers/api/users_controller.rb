@@ -1,14 +1,15 @@
 class Api::UsersController < ApplicationController
+  skip_before_action :authenticate_request, only: :create
   skip_before_action :verify_authenticity_token
-
   def index
     render json: UserSerializer.new(User.all)
   end
 
   def create
-    user = User.new(user_params)
-    if user.save
-      render json: {data: user}
+    debugger
+    @user = User.new(user_params)
+    if @user.save
+      render json: {data: @user, token: @user.generate_jwt}
     else
       render json: {errors: user.errors.message}
     end
@@ -34,6 +35,9 @@ class Api::UsersController < ApplicationController
     render json: UserSerializer.new(user, { params: {user: user} })
   end
 
+  def set_user
+    user= User.find(param[:id])
+  end
   private
 
   def user_params

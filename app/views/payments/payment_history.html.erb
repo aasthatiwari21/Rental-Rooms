@@ -1,0 +1,23 @@
+<h1>Payment History</h1>
+<table>
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Name</th>
+      <th>Property Address</th>
+      <th>Amount</th>
+      <th>Status</th>
+    </tr>
+  </thead><br>
+  <tbody>
+      <tr>
+      <td><%= @payment.created_at %></td>
+       <td><%= @payment.user.name %></td>
+       <td><%= @payment.property.address %></td>
+       <td><%= @payment.amount %></td>
+       <td><%= @payment.status %></td>
+      </tr>
+  
+  </tbody>
+</table>
+<p><%= link_to "Back to Home",root_path, class:'btn btn-primary' %></p>

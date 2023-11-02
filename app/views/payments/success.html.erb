@@ -1,11 +1,11 @@
 <%= render "layouts/navbar" %>
-<div class=center>
+<div class="center">
    <div class="alert alert-primary" role="alert">
       Congratulations You have booked this property successfully.
    </div>
 </div>
 <div class="con">
-   <h1>Your Booked Property</h1>
+   <h1>Your Booked Property Details</h1>
    <p><strong>Type:</strong> <%= @property.property_type.name%></p>
    <p><strong>Size (in sqft):</strong> <%= @property.size_sq_ft %></p>
    <p><strong>Bedrooms:</strong> <%= @property.bedroom %></p>
@@ -14,16 +14,11 @@
    <p><strong>Resident Type:</strong> <%= @property.resident_type %></p>
    <p><strong>Listed By:</strong> <%= @property.listed_by %></p>
    <p><strong>Rent:</strong> <%= @property.rent %></p>
-   <div class="property-images">
-      <h3>Images</h3>
-      <% @property.images.each do |image| %>
-      <%= image_tag image%>
-      <% end %>
-   </div>
-</div>
+   <br>
+   <p><%= button_to "Payment History", payment_payment_history_path , class:'btn btn-primary' %></p>
 
    <div class="aaa">
-   <h3>Add Reviews</button>
+   <h3>Add Reviews</h3>
    <div id="myDIV">
       <%= form_with model: [ @property, @property.reviews.build ] do |form| %>
       <div class="cas">
@@ -41,6 +36,7 @@
          <% end %>
       </div>
    </div>
+</div>
 
 <style>
    .cas{
@@ -51,9 +47,7 @@
    font: italic small-caps bold 20px/40px Georgia, serif;
    padding-left: 3%;
    }
-   body{ 
-   background-image: linear-gradient(to right ,#778899, #2F4F4F); color: white;
-   }
+   
    .center{
    padding-left: 0%;padding-top: 0%;
    padding-right: 0%;

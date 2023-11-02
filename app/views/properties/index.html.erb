@@ -2,6 +2,9 @@
 <div class="container-fluid" >
    <div class="split left">
       <br>
+
+    <% if current_user.role.name == "Seeker"%>
+
       <h4>Filter Properties</h4>
       <%= form_tag(properties_path, method: :get, class: "form") do %>
       <div class="form-group">
@@ -60,10 +63,18 @@
          </div>
       </div>
       <% end %>
-   </div>
+
+      <% end %>
+      </div>
 </div>
 
+
+
 <style>
+   .con{
+   
+   font: italic small-caps bold 20px/40px Georgia, serif;
+   }
    .search{
    margin-top: 40px;
    padding-left: 84%;

@@ -19,14 +19,15 @@
    <p>Rent: <%= @property.rent %></p>
 
    <% if current_user.role.name == "Broker" || current_user.role.name == "Owner" %>
-   <p><%= link_to "Edit",edit_property_path(@property),class:'btn btn-success' %></p>
+   <p><%= link_to "Edit",edit_property_path(@property) , class:'btn btn-success' %></p>
    <p><%= link_to "Destroy", root_path, 
       method: :delete , class:"btn btn-success"
       %></p>
    <%end%>
+
    <% if current_user.role.name == "Seeker"%>
-   <%= button_to "Contact Owner" ,contact_owner_property_path(@property),class: "btn btn-success" %>
-   <%end%>   
+   <%= link_to "Contact Owner" ,contact_owner_property_path(@property) ,class: "btn btn-success" %>
+   <%end%> 
 
 <h3>Reviews</h3>
 
