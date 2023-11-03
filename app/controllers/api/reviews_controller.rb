@@ -5,12 +5,14 @@ class Api::ReviewsController <ApplicationController
    render json: ReviewSerializer.new(Review.all)
   end
    def create
+    if (current_user.role == "Seeker")
        review = Review.new(review_params)
        if review.save
         render json: {data: review}
       else
         render json: {errors: review.errors.messages}
       end
+    end
    end
    def update
     review = Review.find(params[:id])

@@ -98,3 +98,10 @@ gem 'bcrypt', '~> 3.1.7'
 
 gem 'jwt'
 gem 'devise-jwt', '~> 0.11.0'
+
+group :development, :test do
+  gem 'rspec-rails', ">= 6.0.0"
+  gem 'factory_bot_rails'
+  gem 'faker'
+  gem 'simplecov', require: false, group: :test
+end

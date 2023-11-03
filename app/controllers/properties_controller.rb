@@ -13,7 +13,7 @@ class PropertiesController < ApplicationController
     if params[:max_rent].present?
       @properties = @properties.where("rent <= ?", params[:max_rent]) 
     end
-    # @brokered_property = Property.all.where(listed_by: "Broker")
+    @brokered_property = Property.all.where(listed_by: "Broker")
 
   end
 
@@ -57,11 +57,6 @@ class PropertiesController < ApplicationController
 
     redirect_to root_path
   end
-  def authorize_owner_or_broker
-    unless current_user.owner? || (current_user.broker? && current_user == @property.user)
-      redirect_to root_path, alert: 'You are not authorized to perform this action.'
-    end
-  end
 
   def all_properties
     @properties= Property.where(listed_by: ['owner','broker'])
@@ -85,7 +80,7 @@ class PropertiesController < ApplicationController
      @property = Property.find(params[:id])
      @owner = @property.user
      @rent= @property.rent
-  end
+   end
 
     def property_params
     params.require(:property).permit(:furnishing,:size_sq_ft,:bathroom,:bedroom,:rent,:address,:resident_type,:description,:latitude,:longitude, :listed_by,:availability_status,:min_rent,:max_rent,:property_type_id , images: [])

@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   include JsonWebToken
-   # Rbefore_action :authorize_request
+   # before_action :authorize_request
   # skip_before_action :verify_authenticity_token
 
   

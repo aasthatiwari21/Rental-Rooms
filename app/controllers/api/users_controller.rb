@@ -1,5 +1,5 @@
 class Api::UsersController < ApplicationController
-  skip_before_action :authenticate_request, only: :create
+  # skip_before_action :authorize_request, only: :create
   skip_before_action :verify_authenticity_token
   def index
     render json: UserSerializer.new(User.all)
@@ -11,28 +11,30 @@ class Api::UsersController < ApplicationController
     if @user.save
       render json: {data: @user, token: @user.generate_jwt}
     else
-      render json: {errors: user.errors.message}
+      render json: {errors: @user.errors.messages}, status: "422"
     end
   end
 
   def update
-    user = User.find(params[:id])
-    if user.update(user_params)
-      render json: {data: user}
+    debugger
+    @user = User.find(params[:id])
+    if @user.update(user_params)
+      render json: {data: @user}
     else
-      render json: {errors: user.errors.messages}
+      render json: {errors: @user.errors.messages}
     end
   end
 
   def destroy
-    user =User.find(params[:id])
-    user.destroy
-    render json: {data: user}
+    @user =User.find(params[:id])
+    @user.destroy
+    render json: {data: @user}
   end
 
   def show
-    user = User.find_by(id: params[:id])
-    render json: UserSerializer.new(user, { params: {user: user} })
+    debugger
+    @user = User.find_by(id: params[:id])
+    render json: UserSerializer.new(@user, { params: {user: @user} })
   end
 
   def set_user

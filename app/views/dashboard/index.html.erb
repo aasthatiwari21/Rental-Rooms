@@ -20,7 +20,10 @@
          <h3>City: <%=current_user.city%></h3>
          <p><%= link_to "Edit", edit_user_registration_path(current_user),class:'btn btn-success' %></p>
          <p><%= button_to "Destroy",destroy_user_session_path,method: :delete , class:"btn btn-success"%></p>
-         
+         <% if current_user.role.name == "Seeker" %>
+            <p><%= link_to "Payment History", payment_payment_history_path , class:'btn btn-success' %></p>s
+         <% end%>
+
          <% if current_user.role.name == "Broker" %>
                <% current_user.properties.each do |property| %>
                   <% property.images.each do |image| %>
