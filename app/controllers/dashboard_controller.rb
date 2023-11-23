@@ -1,6 +1,6 @@
 class DashboardController < ApplicationController
 	def index
-		@user=current_user
+		@user = current_user
 		if (current_user.role.name == "Owner" && current_user.role.name == "Broker")
 			@property=Property.find(params[:id])
 		end

@@ -8,7 +8,7 @@
                   <div class="card" style="border-radius: 5px;">
                      <div class="card-body p-5">
                         <h3 class="text-uppercase text-center mb-4">Enter Property Details</h3>
-                        <%= form_with model: property do |form| %>
+                        <%= form_with model: Property.new , data: {'js-property-form'} do |form| %>
                         <div class="form-outline mb-4">
                            <%= form.label :property_type_id %><br>
                            <%= form.select :property_type_id, :collection => PropertyType.all.collect{ |ro| [ ro.name, ro.id] },class:"form-control form-control-lg"%>

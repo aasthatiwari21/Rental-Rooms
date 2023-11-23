@@ -9,7 +9,7 @@
    <p><strong>Property Address:</strong> <%= @property.address%></p>
    <% a = @property.rent%>
    <!-- <input type="hidden" name="property_id" value="<#%@property.id%>" > -->
-   <%= button_to 'Payment Now', payments_path(property_id: @property.id), method: :post ,class: "btn btn-success"%>
+   <%= button_to 'Payment Now', payments_path(property_id: @property.id), method: :post ,class: "btn btn-success" , id: "paymentEvent"%>
 </div>
 <style>
    .con{
@@ -20,3 +20,10 @@
    background-color: #E6E6FA; color: black;
    }
 </style>
+<script>
+   document.getElementById("paymentEvent").addEventListener("click",function(){
+      alert('confirm payment')
+   })
+
+  
+</script>

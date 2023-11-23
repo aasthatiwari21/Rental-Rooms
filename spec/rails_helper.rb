@@ -47,7 +47,7 @@ RSpec.configure do |config|
   # examples within a transaction, remove the following line or assign false
   # instead of true.
   config.use_transactional_fixtures = true
-
+  config.include ApiHelpers
   # You can uncomment this line to turn off ActiveRecord support entirely.
   # config.use_active_record = false
 
@@ -65,7 +65,12 @@ RSpec.configure do |config|
 require "rspec/rails"
 # note: require 'devise' after require 'rspec/rails'
 require "devise"
-
+Shoulda::Matchers.configure do |config|
+config.integrate do |with|
+  with.test_framework :rspec
+  with.library :rails
+end
+end
 # require_relative "support/factory_bot"
 
 RSpec.configure do |config|

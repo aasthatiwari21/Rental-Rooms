@@ -2,7 +2,7 @@ class PropertiesController < ApplicationController
    before_action :authenticate_user!
    FILTER_PARAMS = %w(listed_by bedroom bathroom size_sq_ft furnishing)
 
-  def index  
+  def index
     @properties = Property.includes(:property_type).available
     FILTER_PARAMS.each do |fitler_param|
       @properties = @properties.where("#{fitler_param} = ?",  params[fitler_param.to_sym]) if params[fitler_param.to_sym].present?
@@ -13,8 +13,11 @@ class PropertiesController < ApplicationController
     if params[:max_rent].present?
       @properties = @properties.where("rent <= ?", params[:max_rent]) 
     end
-    @brokered_property = Property.all.where(listed_by: "Broker")
 
+    respond_to do |format|
+     format.js 
+     format.html
+    end
   end
 
 
@@ -41,6 +44,7 @@ class PropertiesController < ApplicationController
   def edit
     @property=Property.find(params[:id])
   end
+
   def update
     @property=Property.find(params[:id])
       authorize! :manage,@property
@@ -50,6 +54,7 @@ class PropertiesController < ApplicationController
       render :new
     end
   end
+
   def destroy
     @property=Property.find(property_params[:id])
     authorize! :manage,@property
@@ -82,7 +87,7 @@ class PropertiesController < ApplicationController
      @rent= @property.rent
    end
 
-    def property_params
+  def property_params
     params.require(:property).permit(:furnishing,:size_sq_ft,:bathroom,:bedroom,:rent,:address,:resident_type,:description,:latitude,:longitude, :listed_by,:availability_status,:min_rent,:max_rent,:property_type_id , images: [])
   end
 end

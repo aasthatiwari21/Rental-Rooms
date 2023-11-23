@@ -295,9 +295,7 @@
       "/home/rails-17/Desktop/rental/app/models/property.rb": {
         "lines": [
           1,
-          1,
-          1,
-          1,
+          null,
           1,
           1,
           1,
@@ -350,6 +348,8 @@
           1,
           0,
           null,
+          null,
+          1,
           null
         ]
       },
@@ -373,9 +373,6 @@
           null,
           null,
           null,
-          null,
-          null,
-          null,
           null
         ]
       },
@@ -386,21 +383,23 @@
           null,
           null,
           1,
+          1,
           null,
           1,
           1,
           1,
           1,
           1,
+          null,
+          1,
+          0,
+          null,
           1,
           0,
           null,
           1,
           0,
           null,
-          1,
-          0,
-          null,
           null,
           1,
           0,
@@ -411,94 +410,14 @@
           null,
           null,
           1,
-          1,
-          null,
-          null,
-          null,
-          null,
-          null
-        ]
-      },
-      "/home/rails-17/Desktop/rental/app/controllers/api/users_controller.rb": {
-        "lines": [
-          1,
-          null,
-          1,
-          1,
-          1,
-          null,
-          null,
-          1,
-          2,
-          2,
-          2,
-          1,
-          null,
-          1,
-          null,
-          null,
-          null,
-          1,
-          1,
-          1,
-          1,
-          1,
-          null,
-          0,
-          null,
-          null,
-          null,
-          1,
-          0,
-          0,
           0,
           null,
           null,
           1,
           1,
-          1,
-          1,
-          null,
-          null,
-          1,
           0,
           null,
-          1,
           null,
-          1,
-          4,
-          null,
-          null
-        ]
-      },
-      "/home/rails-17/Desktop/rental/app/models/role.rb": {
-        "lines": [
-          1,
-          1,
-          null
-        ]
-      },
-      "/home/rails-17/Desktop/rental/app/serializers/user_serializer.rb": {
-        "lines": [
-          1,
-          1,
-          1,
-          null,
-          1,
-          2,
-          null,
-          null
-        ]
-      },
-      "/home/rails-17/Desktop/rental/app/serializers/property_serializer.rb": {
-        "lines": [
-          1,
-          1,
-          null,
-          1,
-          null,
-          1,
-          0,
           null,
           null
         ]
@@ -552,10 +471,7 @@
           0,
           0,
           0,
-          0,
-          0,
-          0,
-          0,
+          null,
           0,
           0,
           0,
@@ -564,18 +480,9 @@
           null,
           0,
           0,
-          null,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
           0,
           0,
           null,
-          0,
-          0,
           0,
           0,
           0,
@@ -619,10 +526,9 @@
           0,
           0,
           0,
-          0,
-          0,
-          0,
           null,
+          0,
+          0,
           0,
           0,
           0,
@@ -649,8 +555,11 @@
         "branches": {
         }
       },
-      "/home/rails-17/Desktop/rental/app/controllers/bookings_controller.rb": {
+      "/home/rails-17/Desktop/rental/app/controllers/api/users_controller.rb": {
         "lines": [
+          0,
+          null,
+          0,
           0,
           0,
           0,
@@ -663,6 +572,7 @@
           0,
           0,
           0,
+          null,
           0,
           0,
           0,
@@ -671,7 +581,20 @@
           0,
           0,
           0,
+          null,
           0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          null,
+          0,
+          0,
+          0,
+          0,
+          null,
+          null,
           0,
           null,
           0,
@@ -1128,6 +1051,8 @@
           null,
           null,
           null,
+          null,
+          null,
           0,
           null,
           0,
@@ -1143,20 +1068,6 @@
           0,
           0,
           0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          null,
-          null,
-          null,
-          0,
-          0,
-          0,
-          null,
-          0,
-          null,
           0,
           0,
           0,
@@ -1166,11 +1077,25 @@
           null,
           null,
           0,
+          0,
+          0,
           null,
           0,
           null,
           0,
           0,
+          0,
+          0,
+          0,
+          null,
+          null,
+          null,
+          0,
+          0,
+          0,
+          0,
+          null,
+          null,
           0
         ],
         "branches": {
@@ -1285,6 +1210,51 @@
         "branches": {
         }
       },
+      "/home/rails-17/Desktop/rental/app/jobs/clean_up_job.rb": {
+        "lines": [
+          0,
+          0,
+          0,
+          null,
+          null,
+          0,
+          0,
+          0,
+          0
+        ],
+        "branches": {
+        }
+      },
+      "/home/rails-17/Desktop/rental/app/jobs/guests_cleanup_job.rb": {
+        "lines": [
+          0,
+          0,
+          null,
+          0,
+          null,
+          0,
+          0
+        ],
+        "branches": {
+        }
+      },
+      "/home/rails-17/Desktop/rental/app/jobs/send_emails_job.rb": {
+        "lines": [
+          0,
+          0,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "branches": {
+        }
+      },
       "/home/rails-17/Desktop/rental/app/mailers/application_mailer.rb": {
         "lines": [
           0,
@@ -1323,6 +1293,18 @@
         "branches": {
         }
       },
+      "/home/rails-17/Desktop/rental/app/mailers/user_mailer.rb": {
+        "lines": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "branches": {
+        }
+      },
       "/home/rails-17/Desktop/rental/app/models/ability.rb": {
         "lines": [
           0,
@@ -1335,25 +1317,6 @@
           0,
           0,
           0,
-          0
-        ],
-        "branches": {
-        }
-      },
-      "/home/rails-17/Desktop/rental/app/models/booking.rb": {
-        "lines": [
-          0,
-          0,
-          0,
-          0
-        ],
-        "branches": {
-        }
-      },
-      "/home/rails-17/Desktop/rental/app/models/message.rb": {
-        "lines": [
-          0,
-          null,
           0
         ],
         "branches": {
@@ -1388,6 +1351,30 @@
         "branches": {
         }
       },
+      "/home/rails-17/Desktop/rental/app/models/role.rb": {
+        "lines": [
+          0,
+          0,
+          0
+        ],
+        "branches": {
+        }
+      },
+      "/home/rails-17/Desktop/rental/app/serializers/property_serializer.rb": {
+        "lines": [
+          0,
+          0,
+          null,
+          0,
+          null,
+          0,
+          0,
+          0,
+          0
+        ],
+        "branches": {
+        }
+      },
       "/home/rails-17/Desktop/rental/app/serializers/review_serializer.rb": {
         "lines": [
           0,
@@ -1397,8 +1384,61 @@
         ],
         "branches": {
         }
+      },
+      "/home/rails-17/Desktop/rental/app/serializers/user_serializer.rb": {
+        "lines": [
+          0,
+          0,
+          0,
+          null,
+          0,
+          0,
+          0,
+          0
+        ],
+        "branches": {
+        }
+      },
+      "/home/rails-17/Desktop/rental/app/services/property_creation_services.rb": {
+        "lines": [
+          0,
+          0,
+          0,
+          0,
+          null,
+          0,
+          0,
+          0,
+          null,
+          0
+        ],
+        "branches": {
+        }
+      },
+      "/home/rails-17/Desktop/rental/app/services/twilio/sms_service.rb": {
+        "lines": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0,
+          null,
+          0,
+          0,
+          0,
+          0,
+          null
+        ],
+        "branches": {
+        }
       }
     },
-    "timestamp": 1699016495
+    "timestamp": 1700474634
   }
 }

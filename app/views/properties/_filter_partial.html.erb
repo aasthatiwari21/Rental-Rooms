@@ -1,0 +1,44 @@
+<div id="ffilter">
+<h4>Filter Properties</h4>
+      <%= form_tag(properties_path, method: :get, class: "form", remote: true) do %>
+      <div class="form-group">
+         <%= label_tag "Bedroom" %><br>
+         <%= number_field_tag "bedroom",nil, class: "form-control" %>
+      </div>
+      <div class="form-group">
+         <%= label_tag "Bathroom" %><br>
+         <%= number_field_tag "bathroom", nil, class: "form-control" %>
+      </div>
+      <div class="form-group">
+         <%= label_tag "Size (sqft)" %><br>
+         <%= number_field_tag "size_sq_ft", nil, class: "form-control" %>
+      </div>
+      <div class="form-outline mb-3">
+         <%= label_tag :furnishing, 'Furnishing' %><br>
+         <%= radio_button_tag :furnsihing, 'unfurnished' %>
+         <%= label_tag :furnishing_unfurnished, 'Unfurnished' %><br>
+         <%= radio_button_tag :furnishing, 'semi_furnished'%>
+         <%= label_tag :furnishing_semi_furnished, 'Semi-furnished'%><br>
+         <%= radio_button_tag :furnishing, 'fully_furnished'%>
+         <%= label_tag :furnishing_fully_furnished, 'Fully-furnished'%>          
+      </div>
+      <div class="form-group">
+         <%=label_tag "Min Rent "%> <br>
+         <%= number_field_tag :min_rent, min: 0, class: "form-control"%> <br>
+         <%=label_tag "Max Rent "%><br>
+         <%= number_field_tag :max_rent, max: 100000, class: "form-control" %>
+      </div>
+      <%= button_tag "Apply Filters", class: "btn btn-success" ,id: "formfilter" %>
+      <% end %>
+</div>
+<script>
+$("#formfilter").click(function(e){
+      e.preventdefault()
+      $.ajax({
+      url: '/properties',
+      type: 'GET',
+      data:  $(this).parent('form').serializeArray()
+    });
+       alert('hi');
+   });
+</script>

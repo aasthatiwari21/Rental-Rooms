@@ -1,0 +1,20 @@
+<div id="abc">
+<% @properties.each do |property| %>
+   <div class="col-md-4 mb-4">
+      <div class="property-box p-3">
+         <% if property.images.present? %>
+         <%= image_tag property.images.first, class: "img-fluid", alt: "Property Image" %>
+         <% end %>
+         <p>Type: <%= property.property_type.name%></p>
+         <p>Location: <%= property.address %></p>
+         <p>Listed By: <%= property.listed_by %></p>
+         <a href="<%= property_path(property) %>" class="btn btn-success" , id= "clickeve">View Details</a><br><br>
+         </div>
+      </div>
+<% end %>
+</div>
+<script>
+   document.getElementById("clickeve").addEventListener("click",function(){
+    alert('opening this property')
+  })
+</script>

@@ -3,44 +3,32 @@ class Api::PropertiesController<ApplicationController
 
 	def index
 		properties=Property.includes(:user).available
-		FILTER_PARAMS.each do |fitler_param|
-		      @properties = @properties.where("#{fitler_param} = ?",  params[fitler_param.to_sym]) if params[fitler_param.to_sym].present?
-		    end  
-		    if params[:min_rent].present?
-		      @properties = @properties.where("rent >= ?", params[:min_rent])
-		    end 
-		    if params[:max_rent].present?
-		      @properties = @properties.where("rent <= ?", params[:max_rent]) 
-		    end
 		render json: PropertySerializer.new(properties)
 	end
 
 	def create
-		if (current_user.role == "Owner" && current_user.role == "Broker" ) 
-			 # property = Property.new(property_params)
-			property = current_user.properties.new(property_params)
-			if property.save
-			 	render json: {data: property}
-			 else
-			 	render json: {errors: property.errors.messages}
-			 end
-		end
+		debugger
+			property = Property.new(property_params)
+				if property.save
+				 	render json: {data: property},status: 200
+		
+				else
+					render json: {errors: property.errors.messages} ,status: 422
+				end
 	end
 
 	def update
-		property = Property.find(params[:id])
-		authorize! :manage,property
-		if property.update(property_params)
-			render json: {data: property}
-		else
-			render json: {errors: property.errors.messages}
-		end
+			property = Property.find(params[:id])
+			if property.update(property_params)
+				render json: property , status: 200
+			else
+				render json: {errors: property.errors.messages} , status: 422
+			end
 	end
 	def destroy
-		property= Property.find(params[:id])
-		authorize! :manage, property
-		property.destroy
-		render json: {errors: property.errors.messages}
+			property= Property.find(params[:id])
+			property.destroy
+			render json: {errors: property.errors.messages}, status: 200
 	end
 	def show
 		property= Property.find(params[:id])

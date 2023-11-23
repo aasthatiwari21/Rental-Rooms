@@ -6,7 +6,8 @@
       <%= csrf_meta_tags %>
       <%= csp_meta_tag %>
       <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-      <%= javascript_importmap_tags %>
+      <%= javascript_importmap_tags "properties/show"%>
+      <%= javascript_include_tag 'properties/show' %>
       <%#= button_to 'Sign Out', destroy_user_session_path , method: :delete %>
       <% if notice %>
       <p class="alert alert-success"><%= notice %></p>
@@ -27,6 +28,7 @@
          integrity="sha256-aaODHAgvwQW1bFOGXMeX+pC4PZIPsvn2h1sArYOhgXQ="   crossorigin="anonymous"></script>
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" >
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" >
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
      </head>
    <body>
       <%= yield %>

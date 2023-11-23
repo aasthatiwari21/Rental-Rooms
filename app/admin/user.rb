@@ -13,9 +13,6 @@ ActiveAdmin.register User, as: "users" do
    filter :name 
    filter :email
    filter :city 
-
-
-
 end
 
 

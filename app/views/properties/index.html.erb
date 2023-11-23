@@ -2,40 +2,14 @@
 <div class="container-fluid" >
    <div class="split left">
       <br>
+     <!-- <button type="button" id="property">Request properties</button> -->
+      <button type="button" id="filter">Request filter</button>
+      <div id="properties-filter">
+        <%= render partial: "filter_partial",locals:{property: Property.new} %>
 
-    <% if current_user.role.name == "Seeker"%>
+      </div>
 
-      <h4>Filter Properties</h4>
-      <%= form_tag(properties_path, method: :get, class: "form") do %>
-      <div class="form-group">
-         <%= label_tag "Bedroom" %><br>
-         <%= number_field_tag "bedroom",nil, class: "form-control" %>
-      </div>
-      <div class="form-group">
-         <%= label_tag "Bathroom" %><br>
-         <%= number_field_tag "bathroom", nil, class: "form-control" %>
-      </div>
-      <div class="form-group">
-         <%= label_tag "Size (sqft)" %><br>
-         <%= number_field_tag "size_sq_ft", nil, class: "form-control" %>
-      </div>
-      <div class="form-outline mb-3">
-         <%= label_tag :furnishing, 'Furnishing' %><br>
-         <%= radio_button_tag :furnsihing, 'unfurnished' %>
-         <%= label_tag :furnishing_unfurnished, 'Unfurnished' %><br>
-         <%= radio_button_tag :furnishing, 'semi_furnished'%>
-         <%= label_tag :furnishing_semi_furnished, 'Semi-furnished'%><br>
-         <%= radio_button_tag :furnishing, 'fully_furnished'%>
-         <%= label_tag :furnishing_fully_furnished, 'Fully-furnished'%>          
-      </div>
-      <div class="form-group">
-         <%=label_tag "Min Rent "%> <br>
-         <%= number_field_tag :min_rent, min: 0, class: "form-control"%> <br>
-         <%=label_tag "Max Rent "%><br>
-         <%= number_field_tag :max_rent, max: 100000, class: "form-control" %>
-      </div>
-      <%= submit_tag "Apply Filters", class: "btn btn-success"%>
-      <% end %>
+
    </div>
    <div class="split right">
       <div class="search">
@@ -50,22 +24,13 @@
       </div>
       <h2 class="text-center mb-4">Available Properties</h2>
       <br><br>
-      <% @properties.each do |property| %>
-      <div class="col-md-4 mb-4">
-         <div class="property-box p-3">
-            <% if property.images.present? %>
-            <%= image_tag property.images.first, class: "img-fluid", alt: "Property Image" %>
-            <% end %>
-            <p>Type: <%= property.property_type.name%></p>
-            <p>Location: <%= property.address %></p>
-            <p>Listed By: <%= property.listed_by %></p>
-            <a href="<%= property_path(property) %>" class="btn btn-success">View Details</a><br><br>
-         </div>
-      </div>
-      <% end %>
+      <div id="properties-container">
 
-      <% end %>
+        <%#= render partial: "index_partial",locals:{property: Property.new} %>
+      <!-- <%#= link_to 'Load All', properties_path, id: 'load-more-btn', remote: true %> -->
+
       </div>
+</div>
 </div>
 
 
@@ -118,3 +83,17 @@
    background-size: 9px 9px;
    }
 </style>
+<script> 
+   // $("#property").click(function(){
+   //    $.ajax({
+   //    url: '/properties',
+   //    type: 'GET'
+   //  });
+   // });
+   $("#filter").click(function(){
+      $.ajax({
+      url: '/properties',
+      type: 'GET'
+    });
+   });
+</script>

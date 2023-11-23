@@ -76,6 +76,10 @@ gem "bootstrap-sass"
 
 gem 'jquery-rails'
 
+gem 'jquery-ui-rails'
+
+gem "sassc-rails"
+
 gem 'popper_js', '~> 2.9.2'
 
 gem "mini_magick"
@@ -105,3 +109,18 @@ group :development, :test do
   gem 'faker'
   gem 'simplecov', require: false, group: :test
 end
+
+gem 'shoulda-matchers'
+gem 'shoulda-callback-matchers'
+
+gem 'sidekiq'
+
+gem 'resque'
+
+gem 'redis'
+
+gem 'twilio-ruby'
+
+gem 'dotenv-rails'
+
+gem 'twilio-ruby'

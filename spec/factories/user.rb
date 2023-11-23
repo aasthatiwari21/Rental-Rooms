@@ -6,6 +6,7 @@ FactoryBot.define do
 		password {"123456"}
 		password_confirmation {"123456"}
 		contact {Faker::Number.decimal_part(digits: 10)}
-		role {FactoryBot.create(:role)}
+		# role {FactoryBot.create(:role)}
+		association :role
 	end
 end

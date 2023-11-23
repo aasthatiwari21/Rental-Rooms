@@ -6,7 +6,6 @@ class Api::UsersController < ApplicationController
   end
 
   def create
-    debugger
     @user = User.new(user_params)
     if @user.save
       render json: {data: @user, token: @user.generate_jwt}
@@ -16,30 +15,27 @@ class Api::UsersController < ApplicationController
   end
 
   def update
-    debugger
     @user = User.find(params[:id])
     if @user.update(user_params)
-      render json: {data: @user}
+      render json: {data: @user}, status: 200
     else
-      render json: {errors: @user.errors.messages}
+      render json: {errors: @user.errors.messages}, status: 422
     end
   end
 
   def destroy
+    debugger
     @user =User.find(params[:id])
     @user.destroy
-    render json: {data: @user}
+    render json: {data: @user} ,status: 200
   end
 
   def show
-    debugger
     @user = User.find_by(id: params[:id])
     render json: UserSerializer.new(@user, { params: {user: @user} })
   end
 
-  def set_user
-    user= User.find(param[:id])
-  end
+  
   private
 
   def user_params

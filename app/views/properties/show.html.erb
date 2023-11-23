@@ -2,12 +2,17 @@
 <div class="con">
    <h1>Property Details</h1>
    <h3>Images:</h3>
-   <div class="property-images">
+    <button class= "btn btn-success" id= "see1">hide image</button>
+    <button class= "btn btn-success" id= "see2">show image</button>
+   <div class="property-images" >
       <% @property.images.each do |image| %>
-      <%= image_tag image%>
+      <%= image_tag image ,id: "imggg" %>
       <% end %>
    </div>
+  <button class= "btn btn-success" id= "see3">see full image</button>
+  <button class= "btn btn-success" id= "see4">see image</button>
 
+    <p id="demo"></p>
    <p>Type:<%= @property.property_type.name%></p>
    <p>Address: <%= @property.address %></p>
    <p>Size (in sqft):<%= @property.size_sq_ft %></p>
@@ -26,11 +31,15 @@
    <%end%>
 
    <% if current_user.role.name == "Seeker"%>
-   <%= link_to "Contact Owner" ,contact_owner_property_path(@property) ,class: "btn btn-success" %>
+   <%= link_to "Contact Owner" ,contact_owner_property_path(@property) ,class: "btn btn-success" ,id: "abc"%>
+   <%end%>
+   <% if current_user.role.name == "Seeker"%>
+       <button class= "btn btn-success" id= "contact_o">show image</button>
    <%end%> 
+<br>
+<button onclick="clickevent()" class= "btn btn-success">Reviews</button>
 
-<h3>Reviews</h3>
-
+<div id="review">
 <% @property.reviews.each do |review| %>
   <p>
     <strong>Rating:</strong>
@@ -41,6 +50,8 @@
     <%= review.comment %>
   </p>
 <% end %>
+
+</div>
 
 
  </div>
@@ -58,14 +69,6 @@
    body{ 
    background-color: #E6E6FA; color: black;
    }
-</style>
-<script>
-   function myFunction() {
-     var x = document.getElementById("myDIV");
-     if (x.style.display === "none") {
-       x.style.display = "block";
-     } else {
-       x.style.display = "none";
-     }
-   }
-</script>
+  </style>
+
+  
