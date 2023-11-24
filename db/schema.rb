@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_19_112221) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_01_072013) do
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
     t.text "body"
@@ -28,8 +28,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_19_112221) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
-    t.bigint "record_id", null: false
-    t.bigint "blob_id", null: false
+    t.integer "record_id", null: false
+    t.integer "blob_id", null: false
     t.datetime "created_at", null: false
     t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
@@ -48,7 +48,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_19_112221) do
   end
 
   create_table "active_storage_variant_records", force: :cascade do |t|
-    t.bigint "blob_id", null: false
+    t.integer "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
@@ -91,6 +91,27 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_19_112221) do
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
+  create_table "payment_histories", force: :cascade do |t|
+    t.integer "property_id", null: false
+    t.integer "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.date "booked"
+    t.index ["property_id"], name: "index_payment_histories_on_property_id"
+    t.index ["user_id"], name: "index_payment_histories_on_user_id"
+  end
+
+  create_table "payments", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "status"
+    t.integer "amount"
+    t.integer "property_id", null: false
+    t.integer "user_id", null: false
+    t.index ["property_id"], name: "index_payments_on_property_id"
+    t.index ["user_id"], name: "index_payments_on_user_id"
+  end
+
   create_table "properties", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -102,13 +123,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_19_112221) do
     t.string "address"
     t.integer "resident_type", default: 0
     t.text "description"
-    t.float "latitute"
-    t.float "longitude"
     t.string "listed_by"
     t.integer "property_type_id", null: false
     t.integer "user_id", null: false
     t.integer "availability_status", default: 0
-    t.string "payment_intent_id"
     t.index ["property_type_id"], name: "index_properties_on_property_type_id"
     t.index ["user_id"], name: "index_properties_on_user_id"
   end
@@ -161,6 +179,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_19_112221) do
   add_foreign_key "bookings", "properties"
   add_foreign_key "bookings", "users"
   add_foreign_key "orders", "users"
+  add_foreign_key "payment_histories", "properties"
+  add_foreign_key "payment_histories", "users"
+  add_foreign_key "payments", "properties"
+  add_foreign_key "payments", "users"
   add_foreign_key "properties", "property_types"
   add_foreign_key "properties", "users"
   add_foreign_key "reviews", "properties"

@@ -1,25 +1,29 @@
 <%= render "layouts/navbar" %>
 <div class="con" >
-<h3>Confirm Booking</h3>
-<p><strong>Name:</strong> <%= @owner.name %></p>
-<p><strong>Email:</strong> <%= @owner.email %></p>
-<p><strong>Contact Number:</strong> <%= @owner.contact %></p>
-<p><strong>Owner's City:</strong> <%= @owner.city %></p>
-<p><strong>Payment:</strong> <%= @property.rent %></p>
-<p><strong>Property Address:</strong> <%= @property.address%></p>
-<% a = @property.rent%>
-<!-- <input type="hidden" name="property_id" value="<#%@property.id%>" > -->
-<%= button_to 'Payment Now', payments_path(property_id: @property.id), method: :post ,class: "btn btn-success"%>
-
-</div> 
+   <h3>Confirm Booking</h3>
+   <p><strong>Name:</strong> <%= @owner.name %></p>
+   <p><strong>Email:</strong> <%= @owner.email %></p>
+   <p><strong>Contact Number:</strong> <%= @owner.contact %></p>
+   <p><strong>Owner's City:</strong> <%= @owner.city %></p>
+   <p><strong>Payment:</strong> <%= @property.rent %></p>
+   <p><strong>Property Address:</strong> <%= @property.address%></p>
+   <% a = @property.rent%>
+   <!-- <input type="hidden" name="property_id" value="<#%@property.id%>" > -->
+   <%= button_to 'Payment Now', payments_path(property_id: @property.id), method: :post ,class: "btn btn-success" , id: "paymentEvent"%>
+</div>
 <style>
-	.con{
-		font-family: serif;
-		padding-left: 2%;
-	}
-body{
-        background-color: #E6E6FA; color: black;
-
-}
+   .con{
+   font-family: serif;
+   padding-left: 2%;
+   }
+   body{
+   background-color: #E6E6FA; color: black;
+   }
 </style>
+<script>
+   document.getElementById("paymentEvent").addEventListener("click",function(){
+      alert('confirm payment')
+   })
 
+  
+</script>

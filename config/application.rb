@@ -10,6 +10,11 @@ module Rental
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.0
+    config.active_job.queue_adapter = :sidekiq
+    config.active_job.queue_adapter = :resque
+    config.active_job.queue_name_prefix = "an_optional_queue_prefix"
+
+
 
     # Configuration for the application, engines, and railties goes here.
     #
@@ -20,3 +25,4 @@ module Rental
     # config.eager_load_paths << Rails.root.join("extras")
   end
 end
+

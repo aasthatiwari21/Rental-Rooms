@@ -1,94 +1,80 @@
- <%= render "layouts/navbar" %>
+<%= render "layouts/navbar" %>
 <section class="vh-100">
    <div class="con">
-  <div class="mask d-flex align-items-center h-70 gradient-custom-3">
-    <div class="container-fluid h-70 justify-content-center align-items-center h-70">
-      <div class="row d-flex ">
-        <div class="col-5 col-md-4 col-lg-5 col-xl-5">
-          <div class="card" style="border-radius: 5px;">
-            <div class="card-body p-5">
-                           <h3 class="text-uppercase text-center mb-4">Enter Property Details</h3>
-                  <%= form_with model: property do |form| %>
-
-                    <div class="form-outline mb-4">
-                  <%= form.label :property_type_id %><br>
-                  <%= form.select :property_type_id, :collection => PropertyType.all.collect{ |ro| [ ro.name, ro.id] },class:"form-control form-control-lg"%>
-                          
+      <div class="mask d-flex align-items-center h-70 gradient-custom-3">
+         <div class="container-fluid h-70 justify-content-center align-items-center h-70">
+            <div class="row d-flex ">
+               <div class="col-5 col-md-4 col-lg-5 col-xl-5">
+                  <div class="card" style="border-radius: 5px;">
+                     <div class="card-body p-5">
+                        <h3 class="text-uppercase text-center mb-4">Enter Property Details</h3>
+                        <%= form_with model: Property.new , data: {'js-property-form'} do |form| %>
+                        <div class="form-outline mb-4">
+                           <%= form.label :property_type_id %><br>
+                           <%= form.select :property_type_id, :collection => PropertyType.all.collect{ |ro| [ ro.name, ro.id] },class:"form-control form-control-lg"%>
                         </div>
-
-                <div class="form-outline mb-3">
-                         <%= form.label :rent ,class:"form-label"%><br>
-                        <%= form.number_field :rent ,class:"form-control form-control-lg"%> 
-                </div>
-                <div class="form-outline mb-3">
-                      <%= form.label :furnishing,class:"form-label" %><br>
-                        <%= form.select :furnishing,:collection => ["unfurnished", "semi_furnished", "fully_furnished"],class:"form-control form-control-lg"%> 
-                </div>
-
-                <div class="form-outline mb-3">
+                        <div class="form-outline mb-3">
+                           <%= form.label :rent ,class:"form-label"%><br>
+                           <%= form.number_field :rent ,class:"form-control form-control-lg"%> 
+                        </div>
+                        <div class="form-outline mb-3">
+                           <%= form.label :furnishing,class:"form-label" %><br>
+                           <%= form.select :furnishing,:collection => ["unfurnished", "semi_furnished", "fully_furnished"],class:"form-control form-control-lg"%> 
+                        </div>
+                        <div class="form-outline mb-3">
                            <%= form.label :size_sq_ft,class:"form-label" %><br>
-                          <%= form.number_field :size_sq_ft ,class:"form-control form-control-lg"%> 
-                </div>
-
-                 <div class="form-outline mb-3">
-                               <%= form.label :bathroom ,class:"form-label"%><br>
-                               <%= form.number_field :bathroom,class:"form-control form-control-lg"%> 
-                </div>
-
-                  <div class="form-outline mb-3">
-                               <%= form.label :bedroom ,class:"form-label"%><br>
-                               <%= form.number_field :bedroom,class:"form-control form-control-lg"%> 
-                </div>
-
-                <div class="form-outline mb-3">
-                                <%= form.label :address,class:"form-label"%><br>
-                                <%= form.text_field :address ,class:"form-control form-control-lg"%>
-                </div>
-
-                <div class="form-outline mb-3" >
-                                <%= form.label :resident_type,class:"form-label" %><br>
-                                <%= form.select :resident_type,:collection => ["bachelor", "family"] ,class:"form-control form-control-lg"%>
-                </div>
-
-                  <div class="form-outline mb-3">
-                    <%= form.label :Description ,class:"form-label"%><br>
-                    <%= form.text_area :description,class:"form-control form-control-lg"%>
-                </div>
-
-                <div class="form-outline mb-3">
-                    <%= form.label :listed_by, 'Listed By' %><br>
-                    <%= form.radio_button :listed_by, 'Owner' %>
-                    <%= form.label :listed_by_owner, 'Owner' %>
-                    <%= form.radio_button :listed_by, 'Broker'%> 
-                    <%= form.label :listed_by_broker, 'Broker'%>
-                </div>
-                 <div class="form-outline mb-3">
-                       <%= form.label :images, 'Images' %>
-                        <%= form.file_field :images, multiple: true%><br>
-                </div>
-
-                <div class="d-flex justify-content-center">
-                     <%= form.submit "Create Property",class:"btn btn-success btn-lg gradient-custom-3 text-body"%>
-                </div>
-
-              <%end%>
-
+                           <%= form.number_field :size_sq_ft ,class:"form-control form-control-lg"%> 
+                        </div>
+                        <div class="form-outline mb-3">
+                           <%= form.label :bathroom ,class:"form-label"%><br>
+                           <%= form.number_field :bathroom,class:"form-control form-control-lg"%> 
+                        </div>
+                        <div class="form-outline mb-3">
+                           <%= form.label :bedroom ,class:"form-label"%><br>
+                           <%= form.number_field :bedroom,class:"form-control form-control-lg"%> 
+                        </div>
+                        <div class="form-outline mb-3">
+                           <%= form.label :address,class:"form-label"%><br>
+                           <%= form.text_field :address ,class:"form-control form-control-lg"%>
+                        </div>
+                        <div class="form-outline mb-3" >
+                           <%= form.label :resident_type,class:"form-label" %><br>
+                           <%= form.select :resident_type,:collection => ["bachelor", "family"] ,class:"form-control form-control-lg"%>
+                        </div>
+                        <div class="form-outline mb-3">
+                           <%= form.label :Description ,class:"form-label"%><br>
+                           <%= form.text_area :description,class:"form-control form-control-lg"%>
+                        </div>
+                        <div class="form-outline mb-3">
+                           <%= form.label :listed_by, 'Listed By' %><br>
+                           <%= form.radio_button :listed_by, 'Owner' %>
+                           <%= form.label :listed_by_owner, 'Owner' %>
+                           <%= form.radio_button :listed_by, 'Broker'%> 
+                           <%= form.label :listed_by_broker, 'Broker'%>
+                        </div>
+                        <div class="form-outline mb-3">
+                           <%= form.label :images, 'Images' %>
+                           <%= form.file_field :images, multiple: true%><br>
+                        </div>
+                        <div class="d-flex justify-content-center">
+                           <%= form.submit "Create Property",class:"btn btn-success btn-lg gradient-custom-3 text-body"%>
+                        </div>
+                        <%end%>
+                     </div>
+                  </div>
+               </div>
             </div>
-          </div>
-        </div>
+         </div>
       </div>
-    </div>
-  </div>
-</div>
+   </div>
 </section>
 </div>
 <style>
-  .con{
-    padding-left: 40%;
-
- font: italic small-caps bold 16px/40px Georgia, serif;
-  }
-  body{
-        background-color: #E6E6FA; color: black;
-  }
+   .con{
+   padding-left: 40%;
+   font: italic small-caps bold 16px/40px Georgia, serif;
+   }
+   body{
+   background-color: #E6E6FA; color: black;
+   }
 </style>

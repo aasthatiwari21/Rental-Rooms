@@ -1,32 +1,29 @@
+<%= render "layouts/navbar" %>
 <div class="con">
-<h3 class="text-center mb-3">Search Result</h3><br><br>
-	
-<div class="container mt-5">
-		<% @result.each do |result| %>
+   <h3 class="text-center mb-3">Search Result</h3>
+   <br><br>
+   <div class="container mt-5">
+      <% @result.each do |result| %>
       <div class="col-md-4 mb-4">
-        <div class="property-box p-3 border">
-          <% if result.images.present? %>
-          <%= image_tag result.images.first, class: "img-fluid", alt: "Property Image" %>
-          <% end %>
-          <p>Bathroom: <%= result.bedroom %></p>
-          <p>Location: <%= result.address %></p>
-          <p>Listed By: <%= result.listed_by %></p>
-         <p>Availablity: <%= result.availability_status %></p>
-          <a href="<%= property_path(result) %>" class="btn btn-success">View Details</a><br><br>
-
-        </div>
+         <div class="property-box p-3 border">
+            <% if result.images.present? %>
+            <%= image_tag result.images.first, class: "img-fluid", alt: "Property Image" %>
+            <% end %>
+            <p>Bathroom: <%= result.bedroom %></p>
+            <p>Location: <%= result.address %></p>
+            <p>Listed By: <%= result.listed_by %></p>
+            <p>Availablity: <%= result.availability_status %></p>
+            <a href="<%= property_path(result) %>" class="btn btn-success">View Details</a><br><br>
+         </div>
       </div>
-    <% end %>
-  </div>
+      <% end %>
+   </div>
 </div>
 <style>
    body {
-          background-color: #E6E6FA; color: black;
-
-
-}
-  .con{
-     
-        font: italic small-caps bold 20px/40px Georgia, serif;
-  }
+   background-color: #E6E6FA; color: black;
+   }
+   .con{
+   font: italic small-caps bold 20px/40px Georgia, serif;
+   }
 </style>

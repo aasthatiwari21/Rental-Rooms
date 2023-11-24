@@ -1,28 +1,40 @@
-
 class ApplicationController < ActionController::Base
+  include JsonWebToken
+   # before_action :authorize_request
+  # skip_before_action :verify_authenticity_token
+before_action :configure_permitted_parameters, if: :devise_controller?
 
-  # before_action :configure_permitted_parameters, if: :devise_controller?
-  # before_action :authenticate_user!
+  def after_sign_up_path_for(resource)
+     case resource.role
+     when 'owner', 'broker'
+       new_property_path
+     when 'seeker'
+       properties_path
+     else
+       root_path
+     end
+   end
 
-  #   protected
-  #   def configure_permitted_parameters
+  def not_found
+    render json: { error: 'not_found' }
+  end
 
-  #     devise_parameter_sanitizer.permit(:sign_up) { |u| u.permit(:name, :email, :password, :role_id, :contact,:city,:password_confirmation)}
+  def authorize_request
+    header = request.headers['Authorization']
+    header = header.split(' ').last if header
+    begin
+      @decoded = JsonWebToken.decode(header)
+      @current_user = User.find(@decoded[:user_id])
+    rescue ActiveRecord::RecordNotFound => e
+      render json: { errors: e.message }, status: :unauthorized
+    rescue JWT::DecodeError => e
+      render json: { errors: e.message }, status: :unauthorized
+    end
+  end
 
- 
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :email, :password, :password_confirmation, :contact, :city, :role_id])
+  end
 
-  #     devise_parameter_sanitizer.permit(:account_update) { |u| u.permit(:name, :email, :password, :current_password)}
-
-  #   end
-  rescue_from CanCan::AccessDenied do |exception|
-  redirect_to root_url, :alert => exception.message
-
-  
-end
-  require 'stripe'
-
-   Stripe.api_key = 'sk_test_51O2YupSGEzrH4LcszHrWTM5KGMHQsnS1RW4n32BDvqUtbwxcXV2Dc357Xde4PqLUzhHbpPN2awYM5hO0qYla9Lrl00iPuuobIN'
-
-
-
-end
+   
+ end

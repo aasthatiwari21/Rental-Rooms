@@ -2,9 +2,8 @@ class PropertiesController < ApplicationController
    before_action :authenticate_user!
    FILTER_PARAMS = %w(listed_by bedroom bathroom size_sq_ft furnishing)
 
-  def index  
-    @properties=Property.includes(:property_type).available
-
+  def index
+    @properties = Property.includes(:property_type).available
     FILTER_PARAMS.each do |fitler_param|
       @properties = @properties.where("#{fitler_param} = ?",  params[fitler_param.to_sym]) if params[fitler_param.to_sym].present?
     end  
@@ -14,11 +13,15 @@ class PropertiesController < ApplicationController
     if params[:max_rent].present?
       @properties = @properties.where("rent <= ?", params[:max_rent]) 
     end
+
+    respond_to do |format|
+     format.js 
+     format.html
+    end
   end
 
 
   def show
-    # authorize! :read ,@property
     @property=Property.find(params[:id])
   end
 
@@ -41,6 +44,7 @@ class PropertiesController < ApplicationController
   def edit
     @property=Property.find(params[:id])
   end
+
   def update
     @property=Property.find(params[:id])
       authorize! :manage,@property
@@ -50,16 +54,13 @@ class PropertiesController < ApplicationController
       render :new
     end
   end
+
   def destroy
     @property=Property.find(property_params[:id])
+    authorize! :manage,@property
     @property.destroy
 
     redirect_to root_path
-  end
-  def authorize_owner_or_broker
-    unless current_user.owner? || (current_user.broker? && current_user == @property.user)
-      redirect_to root_path, alert: 'You are not authorized to perform this action.'
-    end
   end
 
   def all_properties
@@ -74,15 +75,18 @@ class PropertiesController < ApplicationController
       @result = Property.all.where("lower(address) LIKE :search",search: "%#{@param}%")
     end
   end
+
   def contact_owner
-    @property = Property.find(params[:id])
+     @property = Property.find(params[:id])
     @owner = @property.user
   end
-  def booking
-    @property = Property.find(params[:id])
-    @owner = @property.user
-    @rent= @property.rent
-  end
+
+   def booking
+     @property = Property.find(params[:id])
+     @owner = @property.user
+     @rent= @property.rent
+   end
+
   def property_params
     params.require(:property).permit(:furnishing,:size_sq_ft,:bathroom,:bedroom,:rent,:address,:resident_type,:description,:latitude,:longitude, :listed_by,:availability_status,:min_rent,:max_rent,:property_type_id , images: [])
   end
